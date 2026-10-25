@@ -14,6 +14,27 @@ void printHUD() {
 resources << "\n";
  std::cout << "--------------------------------------------------------\n";
 }
+void playRoulette() {
+ int roll = rand() % 20 + 1;
+ std::cout << "\n🎲 Вы бросаете D20... Выпало: " << roll << "\n";
+
+ if (roll == 1) {
+  std::cout << "💀 Критическое проклятие! -30 здоровья и -20 очков.\n";
+  hp -= 30;
+  score -= 20;
+  if (score < 0) score = 0;
+ } else if (roll == 20) {
+  std::cout << "✨ ДЖЕКПОТ! +100 очков и +20 ресурсов!\n";
+  score += 100;
+  resources += 20;
+ } else {
+  int multiplier = roll <= 5 ? 1 : roll <= 10 ? 2 : roll <= 15 ? 3 : 4;
+  int reward = multiplier * 10;
+  std::cout << "🍀 Множитель x" << multiplier << "! Вы получаете +"
+			<< reward << " очков.\n";
+  score += reward;
+ }
+}
 // -------------------------------------------------------------
 // [МЕСТО ДЛЯ ФУНКЦИЙ РАЗРАБОТЧИКОВ ИЗ PULL REQUEST'ОВ]
 // -------------------------------------------------------------
@@ -39,8 +60,7 @@ int main() {
  std::cout << "\n[!] Модуль лагеря еще в разработке (Issue#2).\n";
  break;
  case 3:
- // [РАЗРАБОТЧИК 3: ПОДКЛЮЧИТ РУЛЕТКУ/БОССА (ISSUE #3)]
- std::cout << "\n[!] Модуль событий еще в разработке (Issue#3).\n";
+ playRoulette();
  break;
  case 0:
  hp = 0;
