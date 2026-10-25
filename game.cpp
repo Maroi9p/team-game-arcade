@@ -14,6 +14,21 @@ void printHUD() {
 resources << "\n";
  std::cout << "--------------------------------------------------------\n";
 }
+void riskyOperation() {
+ if (rand() % 100 < 50) {
+  int scoreReward = 200 + rand() % 301;
+  int resourceReward = 20 + rand() % 31;
+  resources += resourceReward;
+  score += scoreReward;
+  std::cout << "\n[УСПЕХ] Куш! +" << scoreReward << " очков и +"
+            << resourceReward << " ресурсов.\n";
+ } else {
+  int damage = 30 + rand() % 21;
+  hp -= damage;
+  std::cout << "\n[ПРОВАЛ] Операция сорвалась! -" << damage
+            << " здоровья.\n";
+ }
+}
 void playRoulette() {
  int roll = rand() % 20 + 1;
  std::cout << "\n🎲 Вы бросаете D20... Выпало: " << roll << "\n";
@@ -35,13 +50,6 @@ void playRoulette() {
   score += reward;
  }
 }
-// -------------------------------------------------------------
-// [МЕСТО ДЛЯ ФУНКЦИЙ РАЗРАБОТЧИКОВ ИЗ PULL REQUEST'ОВ]
-// -------------------------------------------------------------
-// -------------------------------------------------------------
-// [МЕСТО ДЛЯ ФУНКЦИЙ РАЗРАБОТЧИКОВ ИЗ PULL REQUEST'ОВ]
-// -------------------------------------------------------------
-
 // Функция для лагеря (Case 2)
 void handleCamp() {
     const int BASE_HEAL_COST = 5;      // Базовая стоимость 1 единицы лечения
@@ -87,7 +95,6 @@ void handleCamp() {
     }
 }
 
-
 int main() {
  srand(time(NULL));
  int choice = 0;
@@ -102,11 +109,10 @@ int main() {
  if (!(std::cin >> choice)) break;
  switch (choice) {
  case 1:
- // [РАЗРАБОТЧИК 1: ПОДКЛЮЧИТ ФУНКЦИЮ РИСКА (ISSUE #1)]
- std::cout << "\n[!] Модуль риска еще в разработке (Issue#1).\n";
+ riskyOperation();
  break;
  case 2:
-  handleCamp()
+  handleCamp();
  break;
  case 3:
  playRoulette();
