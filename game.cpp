@@ -15,14 +15,18 @@ resources << "\n";
  std::cout << "--------------------------------------------------------\n";
 }
 void riskyOperation() {
- if (rand() % 100 < 60) {
-  resources += 30;
-  score += 20;
-  std::cout << "\n[УСПЕХ] Операция прошла удачно! +30 ресурсов и +20 очков.\n";
+ if (rand() % 100 < 50) {
+  int scoreReward = 200 + rand() % 301;
+  int resourceReward = 20 + rand() % 31;
+  resources += resourceReward;
+  score += scoreReward;
+  std::cout << "\n[УСПЕХ] Куш! +" << scoreReward << " очков и +"
+            << resourceReward << " ресурсов.\n";
  } else {
-  hp -= 30;
-  resources = resources >= 10 ? resources - 10 : 0;
-  std::cout << "\n[ПРОВАЛ] Операция сорвалась! -30 здоровья и до -10 ресурсов.\n";
+  int damage = 30 + rand() % 21;
+  hp -= damage;
+  std::cout << "\n[ПРОВАЛ] Операция сорвалась! -" << damage
+            << " здоровья.\n";
  }
 }
 // -------------------------------------------------------------
