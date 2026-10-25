@@ -2,6 +2,9 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 // Состояние игры (базовые переменные)
 int hp = 100;
 int resources = 50; // Деньги / Мана / Патроны / Крышки
@@ -96,6 +99,10 @@ void handleCamp() {
 }
 
 int main() {
+#ifdef _WIN32
+ SetConsoleCP(CP_UTF8);
+ SetConsoleOutputCP(CP_UTF8);
+#endif
  srand(time(NULL));
  int choice = 0;
  std::cout << ">>> ЗАПУСК СИМУЛЯЦИИ: БИТВА ЗА РЕКОРД <<<\n";
